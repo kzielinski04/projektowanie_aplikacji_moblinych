@@ -5,15 +5,18 @@ type ListItemProps = {
     description: string;
     location: string;
     isHighlighted: boolean;
+    onPress?: () => void;
 };
 
-export default function ListItem({ title, description, location, isHighlighted }: ListItemProps) {
+export default function ListItem({ title, description, location, isHighlighted, onPress }: ListItemProps) {
     return (
         <Pressable
-            style={({ hovered, pressed }) => [
+            onPress={onPress}
+            style={({ pressed }) => [
                 styles.container,
                 isHighlighted ? styles.important : styles.default,
-                (hovered || pressed) && styles.active
+                pressed && styles.active,
+                { opacity: pressed ? 0.7 : 1 }
             ]}>
             <View>
                 <Text style={styles.title}>{title}</Text>
@@ -30,6 +33,11 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 10,
         borderRadius: 8,
+        elevation: 2,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
     },
     default: {
         backgroundColor: "#4a90e2",
@@ -39,7 +47,7 @@ const styles = StyleSheet.create({
     },
     active: {
         backgroundColor: "#1f4f85",
-        transform: [{ scale: 1.02 }],
+        transform: [{ scale: 0.98 }],
     },
     title: {
         color: "white",
