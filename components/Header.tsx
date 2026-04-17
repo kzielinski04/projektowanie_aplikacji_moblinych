@@ -1,5 +1,5 @@
+import { styles } from "@/styles/HeaderStyles";
 import { Text, View } from "react-native";
-import { StyleSheet } from "react-native";
 
 type HeaderProps = {
     title: string;
@@ -12,15 +12,3 @@ export default function Header({ title }: HeaderProps) {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-        backgroundColor: "#4a90e2",
-    },
-    title: {
-        color: "white",
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-});
