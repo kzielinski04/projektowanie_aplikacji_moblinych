@@ -6,4 +6,5 @@ export type Event = {
     hour: string;
     date: string;
     category: string;
+    speaker: string;
 }

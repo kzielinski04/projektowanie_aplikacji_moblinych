@@ -1,4 +1,4 @@
-import { events } from "@/data/event";
+import { events as initialEvents } from "@/data/event";
 import { Event } from "@/types/Event";
 import { styles } from "@/styles/HomeScreenStyles";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -7,23 +7,33 @@ import {
     Button,
     FlatList,
     Modal,
-    StyleSheet,
     Text,
     View
 } from "react-native";
 
 import { RootStackParamList } from "@/types/Navigation";
 import ListItem from "../components/ListItem";
+import AddEventForm from "@/components/AddEventForm";
 
 type HomeScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, "Home">; 
 }
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
+    const [events, setEvents] = useState<Event[]>(initialEvents);
+
+    const addEvent = (newEvent: Omit<Event, "id">) => {
+        const eventToAdd: Event = {
+            id: Date.now(),
+            ...newEvent,
+        };
+
+        setEvents((prevEvents) => [eventToAdd, ...prevEvents]);
+    };
+
     const [count, setCount] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
 
-    
     const handlePress = () => {
         const nextCount = count + 1;
         setCount(nextCount);
@@ -32,6 +42,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
     return (
         <View style={styles.container}>
+            <AddEventForm onAddEvent={addEvent}/>
             <FlatList
                 data={events}
                 keyExtractor={(item) => item.id.toString()}
@@ -52,6 +63,8 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                         hour={item.hour}
                         date={item.date}
                         category={item.category}
+                        speaker={item.speaker}
+                        isWorkshop={item.category === "Warsztaty"}
                         isHighlighted={item.id % 2 === 0}
                         onPress={() => navigation.navigate("Details", {
                             title: item.title,
@@ -60,6 +73,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                             hour: item.hour,
                             date: item.date,
                             category: item.category,
+                            speaker: item.speaker,
                         })}
                     />
                 )}

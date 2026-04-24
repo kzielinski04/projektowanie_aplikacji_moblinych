@@ -7,5 +7,6 @@ export type RootStackParamList = {
         hour: string;
         date: string;
         category: string;
+        speaker: string;
     };
 };
