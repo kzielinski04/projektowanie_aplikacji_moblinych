@@ -78,7 +78,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     />
                 )}
             />
-
+            <Button 
+                title="Pokaż posty z API"
+                onPress={() => navigation.navigate("ApiPosts")}
+            />
             <Modal
                 animationType="fade"
                 transparent={true}

@@ -4,7 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { Text, View } from "react-native";
 import HomeScreen from "../../screens/HomeScreen";
-
+import ApiPostsScreen from "@/screens/ApiPostsScreen";
+import ApiPostDetailsScreen from "@/screens/ApiPostDetailsScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -37,18 +38,28 @@ function DetailsScreen({ route }: any) {
 }
 
 export default function App() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen 
-        name="Home" 
-        component={HomeScreen} 
-        options={{ headerShown: false }} 
-      />
-      <Stack.Screen 
-        name="Details" 
-        component={DetailsScreen} 
-        options={{ title: 'Szczegóły wydarzenia' }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator>
+			<Stack.Screen 
+				name="Home" 
+				component={HomeScreen} 
+				options={{ headerShown: false }} 
+			/>
+			<Stack.Screen 
+				name="Details" 
+				component={DetailsScreen} 
+				options={{ title: 'Szczegóły wydarzenia' }}
+			/>
+			<Stack.Screen 
+				name="ApiPosts"
+				component={ApiPostsScreen}
+				options={{ title: "Posty z API" }}
+			/>
+			<Stack.Screen
+				name="ApiPostDetails"
+				component={ApiPostDetailsScreen}
+				options={{ title: "Szczegóły posta" }}
+			/>
+		</Stack.Navigator>
+	);
 }
