@@ -1,12 +1,14 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 
 type ApiPostItemProps = {
+    id: number;
     title: string;
     body: string;
     onPress: () => void;
 };
 
 export default function ApiPostItem({
+    id,
     title,
     body,
     onPress,

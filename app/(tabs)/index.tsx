@@ -6,6 +6,7 @@ import { Text, View } from "react-native";
 import HomeScreen from "../../screens/HomeScreen";
 import ApiPostsScreen from "@/screens/ApiPostsScreen";
 import ApiPostDetailsScreen from "@/screens/ApiPostDetailsScreen";
+import UsersScreen from "@/screens/UsersScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,9 +25,6 @@ function DetailsScreen({ route }: any) {
         <Text style={styles.detailsLabel}>Opis:</Text>
         <Text style={styles.detailsValue}>{description}</Text>
 
-        <Text style={styles.detailsLabel}>Godzina:</Text>
-        <Text style={styles.detailsValue}>{hour}</Text>
-
         <Text style={styles.detailsLabel}>Data:</Text>
         <Text style={styles.detailsValue}>{date}</Text>
 
@@ -38,28 +36,33 @@ function DetailsScreen({ route }: any) {
 }
 
 export default function App() {
-	return (
-		<Stack.Navigator>
-			<Stack.Screen 
-				name="Home" 
-				component={HomeScreen} 
-				options={{ headerShown: false }} 
-			/>
-			<Stack.Screen 
-				name="Details" 
-				component={DetailsScreen} 
-				options={{ title: 'Szczegóły wydarzenia' }}
-			/>
-			<Stack.Screen 
-				name="ApiPosts"
-				component={ApiPostsScreen}
-				options={{ title: "Posty z API" }}
-			/>
-			<Stack.Screen
-				name="ApiPostDetails"
-				component={ApiPostDetailsScreen}
-				options={{ title: "Szczegóły posta" }}
-			/>
-		</Stack.Navigator>
-	);
+    return (
+        <Stack.Navigator>
+            <Stack.Screen 
+                name="Home" 
+                component={HomeScreen} 
+                options={{ headerShown: false }} 
+            />
+            <Stack.Screen 
+                name="Details" 
+                component={DetailsScreen} 
+                options={{ title: 'Szczegóły wydarzenia' }}
+            />
+            <Stack.Screen 
+                name="ApiPosts"
+                component={ApiPostsScreen}
+                options={{ title: "Posty z API" }}
+            />
+            <Stack.Screen
+                name="ApiPostDetails"
+                component={ApiPostDetailsScreen}
+                options={{ title: "Szczegóły posta" }}
+            />
+            <Stack.Screen
+                name="Users"
+                component={UsersScreen}
+                options={{ title: "Użytkownicy" }}
+            />
+        </Stack.Navigator>
+    );
 }
