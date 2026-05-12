@@ -86,6 +86,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 title="Pokaż użytkowników z API"
                 onPress={() => navigation.navigate("Users")}
             />
+            <Button 
+                title="Pokaż listę zadań"
+                onPress={() => navigation.navigate("Todos")}
+            />
             <Modal
                 animationType="fade"
                 transparent={true}

@@ -28,6 +28,14 @@ export default function UsersScreen() {
         );
     }
 
+    if (!isLoading && !error && users?.length === 0) {
+        return (
+            <View style={styles.centered}>
+                <Text style={styles.infoText}>Brak danych do wyświetlenia.</Text>
+            </View>
+        );
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Użytkownicy</Text>
@@ -45,13 +53,17 @@ export default function UsersScreen() {
                 )}
             />
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {},
     header: {},
-    centered: {},
+    centered: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
     errorText: {},
     infoText: {},
-})
+});

@@ -1,16 +1,10 @@
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { RouteProp } from "@react-navigation/native";
-import { RootStackParamList } from "@/types/Navigation";
-
-type ApiPostDetailsRouteProp = RouteProp<RootStackParamList, 'ApiPostDetails'>;
-
-type Props = {
-    route: ApiPostDetailsRouteProp;
-};
+import { ApiPostDetailsScreenProps } from "@/types/Navigation";
 
 export default function ApiPostDetailsScreen({
     route,
-}: Props) {
+}: ApiPostDetailsScreenProps) {
     const { id, title, body } = route.params;
 
     return (
@@ -26,22 +20,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
     },
     title: {
         fontSize: 22,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         marginBottom: 16,
-        textTransform: 'capitalize',
+        textTransform: "capitalize",
     },
     meta: {
         fontSize: 14,
-        color: '#666',
+        color: "#666",
         marginBottom: 12,
     },
     body: {
         fontSize: 16,
         lineHeight: 24,
-        color: '#333',
+        color: "#333",
     },
 });

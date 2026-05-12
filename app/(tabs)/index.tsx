@@ -7,6 +7,7 @@ import HomeScreen from "../../screens/HomeScreen";
 import ApiPostsScreen from "@/screens/ApiPostsScreen";
 import ApiPostDetailsScreen from "@/screens/ApiPostDetailsScreen";
 import UsersScreen from "@/screens/UsersScreen";
+import TodosScreen from "@/screens/TodosScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -62,6 +63,11 @@ export default function App() {
                 name="Users"
                 component={UsersScreen}
                 options={{ title: "Użytkownicy" }}
+            />
+            <Stack.Screen
+                name="Todos"
+                component={TodosScreen}
+                options={{ title: "Lista zadań" }}
             />
         </Stack.Navigator>
     );

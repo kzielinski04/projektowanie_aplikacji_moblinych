@@ -19,17 +19,26 @@ export type RootStackParamList = {
         body: string;
     };
     Users: undefined;
+    Todos: undefined;
 };
 
 export type ApiPostsScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, "ApiPosts">;
-}
+};
 
 type ApiPostDetailsRouteProp = RouteProp<
     RootStackParamList,
     "ApiPostDetails"
 >;
 
-type ApiPostDetailsScreenProps = {
+export type ApiPostDetailsScreenProps = {
     route: ApiPostDetailsRouteProp;
+};
+
+export type HomeScreenProps = {
+    navigation: NativeStackNavigationProp<RootStackParamList, "Home">;
+};
+
+export type TodosScreenProps = {
+    navigation: NativeStackNavigationProp<RootStackParamList, "Todos">;
 };

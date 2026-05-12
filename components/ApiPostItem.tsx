@@ -20,7 +20,7 @@ export default function ApiPostItem({
                 {body}
             </Text>
         </Pressable>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
