@@ -1,51 +1,41 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-interface TodoItemProps {
+type TodoItemProps = {
     title: string;
     completed: boolean;
-}
+    onPress: () => void;
+};
 
-export default function TodoItem({ title, completed }: TodoItemProps) {
+export default function TodoItem({ title, completed, onPress }: TodoItemProps) {
     return (
-        <View style={styles.card}>
+        <Pressable onPress={onPress} style={styles.container}>
             <Text style={styles.title}>{title}</Text>
-            <View style={styles.statusContainer}>
-                <Text style={styles.label}>Status: </Text>
-                <Text style={[styles.status, completed ? styles.completed : styles.pending]}>
-                    {completed ? "Wykonane" : "Niewykonane"}
-                </Text>
-            </View>
-        </View>
+            <Text
+                style={[
+                    styles.status,
+                    completed ? styles.completed : styles.pending,
+                ]}
+            >
+                {completed ? "Wykonane" : "Niewykonane"}
+            </Text>
+        </Pressable>
     );
 }
 
 const styles = StyleSheet.create({
-    card: {
-        backgroundColor: "#fff",
+    container: {
+        backgroundColor: "#ffffff",
         padding: 16,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        borderRadius: 8,
+        marginHorizontal: 12,
+        marginVertical: 6,
+        borderRadius: 10,
         elevation: 2,
-        shadowColor: "#000",
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        shadowOffset: { width: 0, height: 2 },
     },
     title: {
         fontSize: 16,
         fontWeight: "bold",
-        marginBottom: 8,
-        color: "#333",
-    },
-    statusContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    label: {
-        fontSize: 14,
-        color: "#666",
+        marginBottom: 6,
+        color: "#1a1a1a",
     },
     status: {
         fontSize: 14,

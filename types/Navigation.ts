@@ -15,11 +15,15 @@ export type RootStackParamList = {
     ApiPosts: undefined;
     ApiPostDetails: {
         id: number;
-        title: string;
-        body: string;
     };
     Users: undefined;
+    UserDetails: {
+        id: number;
+    };
     Todos: undefined;
+    TodoDetails: {
+        id: number;
+    };
 };
 
 export type ApiPostsScreenProps = {
@@ -39,6 +43,22 @@ export type HomeScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, "Home">;
 };
 
+export type UsersScreenProps = {
+    navigation: NativeStackNavigationProp<RootStackParamList, "Users">;
+};
+
+type UserDetailsRouteProp = RouteProp<RootStackParamList, "UserDetails">;
+
+export type UserDetailsScreenProps = {
+    route: UserDetailsRouteProp;
+};
+
 export type TodosScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, "Todos">;
+};
+
+type TodoDetailsRouteProp = RouteProp<RootStackParamList, "TodoDetails">;
+
+export type TodoDetailsScreenProps = {
+    route: TodoDetailsRouteProp;
 };

@@ -1,24 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import { ApiPostDetailsScreenProps } from "@/types/Navigation";
+import { UserDetailsScreenProps } from "@/types/Navigation";
 import { useFetch } from "@/hooks/useFetch";
-import { Post } from "@/types/Post";
-import { Comment } from "@/types/Comment";
+import { User } from "@/types/User";
 
-export default function ApiPostDetailsScreen({
-    route,
-}: ApiPostDetailsScreenProps) {
+export default function UserDetailsScreen({ route }: UserDetailsScreenProps) {
     const { id } = route.params;
 
-    const { data: comments, isLoading: areCommentsLoading, error: commentsError } = useFetch<Comment[]>(
-        `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
-    );
-    
-    const { data: post, isLoading, error } = useFetch<Post>(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
+    const { data: user, isLoading, error } = useFetch<User>(
+        `https://jsonplaceholder.typicode.com/users/${id}`,
     );
 
-    if (isLoading || areCommentsLoading) {
+    if (isLoading) {
         return (
             <View style={styles.centered}>
                 <ActivityIndicator size="large" color="#007AFF" />
@@ -27,7 +20,7 @@ export default function ApiPostDetailsScreen({
         );
     }
 
-    if (error || commentsError) {
+    if (error) {
         return (
             <View style={styles.centered}>
                 <Text style={styles.errorText}>{error}</Text>
@@ -35,23 +28,37 @@ export default function ApiPostDetailsScreen({
         );
     }
 
-    if (!post) {
+    if (!user) {
         return (
             <View style={styles.centered}>
-                <Text style={styles.infoText}>Nie znaleziono posta.</Text>
+                <Text style={styles.infoText}>Nie znaleziono użytkownika.</Text>
             </View>
         );
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{post.title}</Text>
-            <Text style={styles.meta}>ID posta: {id}</Text>
-            <Text style={styles.body}>{post.body}</Text>
-            <Text style={styles.author}>Autor: {post.userId}</Text>
-            <Text style={styles.comments}>
-                Liczba komentarzy: {comments?.length ?? 0}
-            </Text>
+            <Text style={styles.name}>{user.name}</Text>
+
+            <View style={styles.row}>
+                <Text style={styles.label}>Username:</Text>
+                <Text style={styles.value}>@{user.username}</Text>
+            </View>
+
+            <View style={styles.row}>
+                <Text style={styles.label}>Email:</Text>
+                <Text style={styles.value}>{user.email}</Text>
+            </View>
+
+            <View style={styles.row}>
+                <Text style={styles.label}>Telefon:</Text>
+                <Text style={styles.value}>{user.phone}</Text>
+            </View>
+
+            <View style={styles.row}>
+                <Text style={styles.label}>Strona www:</Text>
+                <Text style={styles.value}>{user.website}</Text>
+            </View>
         </View>
     );
 }
@@ -79,30 +86,23 @@ const styles = StyleSheet.create({
         textAlign: "center",
         lineHeight: 22,
     },
-    title: {
-        fontSize: 22,
+    name: {
+        fontSize: 24,
         fontWeight: "bold",
+        marginBottom: 24,
+        color: "#1a1a1a",
+    },
+    row: {
         marginBottom: 16,
-        textTransform: "capitalize",
     },
-    meta: {
+    label: {
         fontSize: 14,
         color: "#666",
-        marginBottom: 12,
+        marginBottom: 4,
     },
-    body: {
+    value: {
         fontSize: 16,
-        lineHeight: 24,
         color: "#333",
-    },
-    author: {
-        fontSize: 14,
-        color: "#666",
-        marginBottom: 12,
-    },
-    comments: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginTop: 20,
+        lineHeight: 22,
     },
 });

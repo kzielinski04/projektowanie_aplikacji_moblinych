@@ -1,10 +1,16 @@
-import React from "react";
-import { View, Text, StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    ActivityIndicator,
+} from "react-native";
 import { Todo } from "@/types/Todo";
 import TodoItem from "@/components/TodoItem";
 import { useFetch } from "@/hooks/useFetch";
+import { TodosScreenProps } from "@/types/Navigation";
 
-export default function TodosScreen() {
+export default function TodosScreen({ navigation }: TodosScreenProps) {
     const {
         data: todos,
         isLoading,
@@ -14,7 +20,7 @@ export default function TodosScreen() {
     if (isLoading) {
         return (
             <View style={styles.centered}>
-                <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator size="large" color="#007AFF" />
                 <Text style={styles.infoText}>Ładowanie zadań...</Text>
             </View>
         );
@@ -40,14 +46,18 @@ export default function TodosScreen() {
 
     return (
         <View style={styles.container}>
-            <FlatList 
+            <Text style={styles.header}>Lista zadań</Text>
+
+            <FlatList
                 data={limitedTodos}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={styles.listContainer}
                 renderItem={({ item }) => (
-                    <TodoItem 
+                    <TodoItem
                         title={item.title}
                         completed={item.completed}
+                        onPress={() =>
+                            navigation.navigate("TodoDetails", { id: item.id })
+                        }
                     />
                 )}
             />
@@ -58,25 +68,32 @@ export default function TodosScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#f2f2f2",
+        paddingTop: 10,
     },
-    listContainer: {
-        paddingVertical: 8,
+    header: {
+        fontSize: 26,
+        fontWeight: "900",
+        color: "#1a1a1a",
+        paddingHorizontal: 16,
+        paddingBottom: 10,
     },
     centered: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 16,
-    },
-    errorText: {
-        color: "red",
-        fontSize: 16,
-        textAlign: "center",
+        padding: 20,
+        backgroundColor: "#f2f2f2",
     },
     infoText: {
         marginTop: 12,
         fontSize: 16,
-        color: "#555",
+        color: "#444",
+    },
+    errorText: {
+        fontSize: 16,
+        color: "#b00020",
+        textAlign: "center",
+        lineHeight: 22,
     },
 });
