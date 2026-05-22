@@ -3,6 +3,7 @@ import { RouteProp } from "@react-navigation/native";
 
 export type RootStackParamList = {
     Home: undefined;
+    FavoritePosts: undefined;
     Details: {
         title: string;
         description: string;
@@ -41,6 +42,10 @@ export type ApiPostDetailsScreenProps = {
 
 export type HomeScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, "Home">;
+};
+
+export type FavoritePostsScreenProps = {
+    navigation: NativeStackNavigationProp<RootStackParamList, "FavoritePosts">;
 };
 
 export type UsersScreenProps = {

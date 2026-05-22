@@ -82,6 +82,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 title="Pokaż posty z API"
                 onPress={() => navigation.navigate("ApiPosts")}
             />
+            <Button
+                title="Pokaż ulubione posty"
+                onPress={() => navigation.navigate("FavoritePosts")}
+            />
             <Button 
                 title="Pokaż użytkowników z API"
                 onPress={() => navigation.navigate("Users")}

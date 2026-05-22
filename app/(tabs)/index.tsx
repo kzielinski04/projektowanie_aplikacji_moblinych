@@ -10,6 +10,7 @@ import UsersScreen from "@/screens/UsersScreen";
 import UserDetailsScreen from "@/screens/UserDetailsScreen";
 import TodosScreen from "@/screens/TodosScreen";
 import TodoDetailsScreen from "@/screens/TodoDetailsScreen";
+import FavoritePostsScreen from "@/screens/FavoritePostsScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -80,6 +81,11 @@ export default function App() {
                 name="TodoDetails"
                 component={TodoDetailsScreen}
                 options={{ title: "Szczegóły zadania" }}
+            />
+            <Stack.Screen
+                name="FavoritePosts"
+                component={ FavoritePostsScreen }
+                options={{ title: "Ulubione" }}
             />
         </Stack.Navigator>
     );
