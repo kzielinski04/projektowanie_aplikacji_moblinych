@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, Text } from "react-native";
+import { styles } from "@/styles/TodoItemStyles";
 
 type TodoItemProps = {
     title: string;
@@ -22,29 +23,3 @@ export default function TodoItem({ title, completed, onPress }: TodoItemProps) {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#ffffff",
-        padding: 16,
-        marginHorizontal: 12,
-        marginVertical: 6,
-        borderRadius: 10,
-        elevation: 2,
-    },
-    title: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginBottom: 6,
-        color: "#1a1a1a",
-    },
-    status: {
-        fontSize: 14,
-        fontWeight: "600",
-    },
-    completed: {
-        color: "#2e7d32",
-    },
-    pending: {
-        color: "#c62828",
-    },
-});

@@ -21,7 +21,6 @@ export default function ListItem({ title, description, location, hour, date, cat
             style={({ pressed }) => [
                 styles.container,
                 isHighlighted ? styles.important : styles.default,
-                isWorkshop && { backgroundColor: "#fff3cd" },
                 pressed && styles.active,
                 { opacity: pressed ? 0.7 : 1 }
             ]}>

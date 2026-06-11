@@ -58,6 +58,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
     const [count, setCount] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
+    const [addEventModalVisible, setAddEventModalVisible] = useState(false);
 
     const handlePress = () => {
         const nextCount = count + 1;
@@ -65,9 +66,13 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         if (nextCount > 4) setModalVisible(true);
     };
 
+    const handleAddEvent = (newEvent: Omit<Event, "id">) => {
+        addEvent(newEvent);
+        setAddEventModalVisible(false);
+    };
+
     return (
         <View style={styles.container}>
-            <AddEventForm onAddEvent={addEvent}/>
             <FlatList
                 data={filteredEvents}
                 keyExtractor={(item) => item.id.toString()}
@@ -77,6 +82,13 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                             <Text style={styles.counterText}>Licznik: {count}</Text>
                             <Button title="Zwiększ" onPress={handlePress} />
                         </View>
+                        <View style={styles.navigationButtons}>
+                            <Button title="Dodaj wydarzenie" onPress={() => setAddEventModalVisible(true)} />
+                            <Button title="Posty z API" onPress={() => navigation.navigate("ApiPosts")} />
+                            <Button title="Ulubione posty" onPress={() => navigation.navigate("FavoritePosts")} />
+                            <Button title="Użytkownicy" onPress={() => navigation.navigate("Users")} />
+                            <Button title="Lista zadań" onPress={() => navigation.navigate("Todos")} />
+                        </View>
                         <Text style={styles.header}>Wydarzenia</Text>
 
                         {/* Sekcja wyszukiwania */}
@@ -85,57 +97,32 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                             placeholderTextColor="#999"
                             value={searchText}
                             onChangeText={setSearchText}
-                            style={{
-                                borderWidth: 1,
-                                borderColor: "#ccc",
-                                borderRadius: 8,
-                                paddingHorizontal: 12,
-                                paddingVertical: 10,
-                                marginHorizontal: 16,
-                                marginVertical: 12,
-                                fontSize: 14,
-                                backgroundColor: "#fff",
-                            }}
+                            style={styles.searchInput}
                         />
 
                         {/* Sekcja filtrowania po kategorii */}
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            style={{
-                                marginHorizontal: 16,
-                                marginBottom: 12,
-                                maxHeight: 50,
-                            }}
+                            style={styles.categoryScrollView}
                         >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    gap: 8,
-                                }}
-                            >
+                            <View style={styles.categoryList}>
                                 <View
-                                    style={{
-                                        paddingHorizontal: 12,
-                                        paddingVertical: 8,
-                                        backgroundColor:
-                                            selectedCategory === null
-                                                ? "#007AFF"
-                                                : "#ddd",
-                                        borderRadius: 6,
-                                        justifyContent: "center",
-                                    }}
+                                    style={[
+                                        styles.categoryButton,
+                                        selectedCategory === null
+                                            ? styles.categoryButtonActive
+                                            : styles.categoryButtonInactive,
+                                    ]}
                                 >
                                     <Text
                                         onPress={() => setSelectedCategory(null)}
-                                        style={{
-                                            color:
-                                                selectedCategory === null
-                                                    ? "#fff"
-                                                    : "#000",
-                                            fontWeight: "600",
-                                            fontSize: 12,
-                                        }}
+                                        style={[
+                                            styles.categoryButtonText,
+                                            selectedCategory === null
+                                                ? styles.categoryButtonTextActive
+                                                : styles.categoryButtonTextInactive,
+                                        ]}
                                     >
                                         Wszystkie
                                     </Text>
@@ -144,29 +131,21 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                                 {availableCategories.map((category) => (
                                     <View
                                         key={category}
-                                        style={{
-                                            paddingHorizontal: 12,
-                                            paddingVertical: 8,
-                                            backgroundColor:
-                                                selectedCategory === category
-                                                    ? "#007AFF"
-                                                    : "#ddd",
-                                            borderRadius: 6,
-                                            justifyContent: "center",
-                                        }}
+                                        style={[
+                                            styles.categoryButton,
+                                            selectedCategory === category
+                                                ? styles.categoryButtonActive
+                                                : styles.categoryButtonInactive,
+                                        ]}
                                     >
                                         <Text
-                                            onPress={() =>
-                                                setSelectedCategory(category)
-                                            }
-                                            style={{
-                                                color:
-                                                    selectedCategory === category
-                                                        ? "#fff"
-                                                        : "#000",
-                                                fontWeight: "600",
-                                                fontSize: 12,
-                                            }}
+                                            onPress={() => setSelectedCategory(category)}
+                                            style={[
+                                                styles.categoryButtonText,
+                                                selectedCategory === category
+                                                    ? styles.categoryButtonTextActive
+                                                    : styles.categoryButtonTextInactive,
+                                            ]}
                                         >
                                             {category}
                                         </Text>
@@ -175,44 +154,15 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                             </View>
                         </ScrollView>
 
-                        {/* Licznik wyników */}
-                        <Text
-                            style={{
-                                marginHorizontal: 16,
-                                marginBottom: 8,
-                                color: "#666",
-                                fontSize: 12,
-                            }}
-                        >
+                        <Text style={styles.resultsCount}>
                             Wyników: {filteredEvents.length}
                         </Text>
                     </>
                 }
                 ListEmptyComponent={
-                    <View
-                        style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            paddingVertical: 40,
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontSize: 16,
-                                color: "#999",
-                                marginBottom: 8,
-                            }}
-                        >
-                            Brak wyników
-                        </Text>
-                        <Text
-                            style={{
-                                fontSize: 13,
-                                color: "#ccc",
-                                textAlign: "center",
-                                paddingHorizontal: 20,
-                            }}
-                        >
+                    <View style={styles.emptyContainer}>
+                        <Text style={styles.emptyText}>Brak wyników</Text>
+                        <Text style={styles.emptySubtext}>
                             Spróbuj zmienić filtry lub frażę wyszukiwania
                         </Text>
                     </View>
@@ -240,22 +190,20 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     />
                 )}
             />
-            <Button 
-                title="Pokaż posty z API"
-                onPress={() => navigation.navigate("ApiPosts")}
-            />
-            <Button
-                title="Pokaż ulubione posty"
-                onPress={() => navigation.navigate("FavoritePosts")}
-            />
-            <Button 
-                title="Pokaż użytkowników z API"
-                onPress={() => navigation.navigate("Users")}
-            />
-            <Button 
-                title="Pokaż listę zadań"
-                onPress={() => navigation.navigate("Todos")}
-            />
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={addEventModalVisible}
+                onRequestClose={() => setAddEventModalVisible(false)}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalTitle}>Dodaj wydarzenie</Text>
+                        <AddEventForm onAddEvent={handleAddEvent} />
+                        <Button title="Anuluj" onPress={() => setAddEventModalVisible(false)} />
+                    </View>
+                </View>
+            </Modal>
             <Modal
                 animationType="fade"
                 transparent={true}

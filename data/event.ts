@@ -9,6 +9,7 @@ export const events: Event[] = [
         hour: "10:00", 
         date: "2026-09-01",
         category: "Wykład",
+        speaker: "Speaker 1",
     },
     {
         id: 2,
@@ -18,6 +19,7 @@ export const events: Event[] = [
         hour: "12:00",
         date: "2026-04-17",
         category: "Warsztaty",
+        speaker: "Speaker 2",
     },
     {
         id: 3,
@@ -27,6 +29,7 @@ export const events: Event[] = [
         hour: "15:00",
         date: "2026-08-13",
         category: "Spotkanie",
+        speaker: "Speaker 3",
     },
     {
         id: 4,
@@ -36,6 +39,7 @@ export const events: Event[] = [
         hour: "09:00",
         date: "2026-07-07",
         category: "Konferencja",
+        speaker: "Speaker 4",
     },
     {
         id: 5,
@@ -45,5 +49,6 @@ export const events: Event[] = [
         hour: "17:30",
         date: "2026-10-01",
         category: "Mecz",
+        speaker: "Speaker 5",
     },
 ];
