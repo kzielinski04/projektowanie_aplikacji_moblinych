@@ -3,17 +3,13 @@ import { styles } from "@/styles/ListItemStyles";
 
 type ListItemProps = {
     title: string;
-    description: string;
-    location: string;
-    hour: string;
     date: string;
     category: string;
-    speaker: string;
     isWorkshop?: boolean;
     onPress?: () => void;
 };
 
-export default function ListItem({ title, description, location, hour, date, category, speaker, isWorkshop, onPress }: ListItemProps) {
+export default function ListItem({ title, date, category, isWorkshop, onPress }: ListItemProps) {
     return (
         <Pressable
             onPress={onPress}
@@ -25,12 +21,8 @@ export default function ListItem({ title, description, location, hour, date, cat
             ]}>
             <View>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.description}>{description}</Text>
-                <Text style={styles.location}>{location}</Text>
-                <Text style={styles.location}>{hour}</Text>
                 <Text style={styles.location}>{date}</Text>
                 <Text style={styles.location}>{category}</Text>
-                <Text style={styles.location}>{speaker}</Text>
             </View>
         </Pressable>
     );

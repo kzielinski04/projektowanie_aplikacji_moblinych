@@ -12,6 +12,7 @@ import {
     TextInput,
     View
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import AddEventForm from "@/components/AddEventForm";
 import { RootStackParamList } from "@/types/Navigation";
@@ -72,7 +73,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     };
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <FlatList
                 data={filteredEvents}
                 keyExtractor={(item) => item.id.toString()}
@@ -168,14 +169,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     </View>
                 }
                 renderItem={({ item }: { item: Event }) => (
-                    <ListItem 
+                    <ListItem
                         title={item.title}
-                        description={item.description}
-                        location={item.location}
-                        hour={item.hour}
                         date={item.date}
                         category={item.category}
-                        speaker={item.speaker}
                         isWorkshop={item.category === "Warsztaty"}
                         onPress={() => navigation.navigate("Details", {
                             id: item.id,
@@ -218,6 +215,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     </View>
                 </View>
             </Modal>
-        </View>
+        </SafeAreaView>
     );
 }
