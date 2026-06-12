@@ -9,18 +9,17 @@ type ListItemProps = {
     date: string;
     category: string;
     speaker: string;
-    isHighlighted: boolean;
     isWorkshop?: boolean;
     onPress?: () => void;
 };
 
-export default function ListItem({ title, description, location, hour, date, category, speaker, isHighlighted, isWorkshop, onPress }: ListItemProps) {
+export default function ListItem({ title, description, location, hour, date, category, speaker, isWorkshop, onPress }: ListItemProps) {
     return (
         <Pressable
             onPress={onPress}
             style={({ pressed }) => [
                 styles.container,
-                isHighlighted ? styles.important : styles.default,
+                isWorkshop ? styles.important : styles.default,
                 pressed && styles.active,
                 { opacity: pressed ? 0.7 : 1 }
             ]}>

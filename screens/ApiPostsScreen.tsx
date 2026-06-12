@@ -43,12 +43,14 @@ export default function ApiPostsScreen({ navigation }: ApiPostsScreenProps) {
         );
     }
 
+    const limitedPosts = posts?.slice(0, 10) ?? [];
+
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Posty z API</Text>
+            <Text style={styles.header}>Posty z API ({limitedPosts.length})</Text>
 
             <FlatList
-                data={posts ?? []}
+                data={limitedPosts}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <ApiPostItem

@@ -163,7 +163,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     <View style={styles.emptyContainer}>
                         <Text style={styles.emptyText}>Brak wyników</Text>
                         <Text style={styles.emptySubtext}>
-                            Spróbuj zmienić filtry lub frażę wyszukiwania
+                            Spróbuj zmienić filtry lub frazę wyszukiwania
                         </Text>
                     </View>
                 }
@@ -177,8 +177,8 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                         category={item.category}
                         speaker={item.speaker}
                         isWorkshop={item.category === "Warsztaty"}
-                        isHighlighted={item.id % 2 === 0}
                         onPress={() => navigation.navigate("Details", {
+                            id: item.id,
                             title: item.title,
                             description: item.description,
                             location: item.location,

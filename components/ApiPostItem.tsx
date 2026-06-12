@@ -16,6 +16,7 @@ export default function ApiPostItem({
 }: ApiPostItemProps) {
     return (
         <Pressable onPress={onPress} style={styles.container}>
+            <Text style={styles.body}>#{id}</Text>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.body} numberOfLines={2}>
                 {body}

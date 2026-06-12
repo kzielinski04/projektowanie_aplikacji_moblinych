@@ -18,17 +18,17 @@ export default function AddEventForm({ onAddEvent }: AddEventFormProps) {
 
     const handleAddEvent = () => {
         if (title.length < 3) {
-            Alert.alert("Blad", "Tytul musi miec co najmniej 3 znaki.");
+            Alert.alert("Błąd", "Tytuł musi mieć co najmniej 3 znaki.");
             return;
         }
 
         if (!date.trim()) {
-            Alert.alert("Blad", "Data nie moze byc pusta.");
+            Alert.alert("Błąd", "Data nie może być pusta.");
             return;
         }
 
         if (!description || !hour || !location || !category || !speaker) {
-            Alert.alert("Blad", "Wszystkie pola musza byc uzupelnione.");
+            Alert.alert("Błąd", "Wszystkie pola muszą być uzupełnione.");
             return;
         }
 

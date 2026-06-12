@@ -21,10 +21,10 @@ export default function App() {
                 component={HomeScreen} 
                 options={{ headerShown: false }} 
             />
-            <Stack.Screen 
-                name="Details" 
-                component={DetailsScreen} 
-                options={{ title: 'Szczegóły wydarzenia' }}
+            <Stack.Screen
+                name="Details"
+                component={DetailsScreen}
+                options={({ route }) => ({ title: route.params.title })}
             />
             <Stack.Screen 
                 name="ApiPosts"

@@ -5,16 +5,19 @@ import { styles } from "@/styles/DetailsScreenStyles";
 
 type DetailsScreenRouteProp = RouteProp<RootStackParamList, "Details">;
 
-type Props = {
+type DetailsScreenProps = {
     route: DetailsScreenRouteProp;
 };
 
-export default function DetailsScreen({ route }: Props) {
-    const { title, description, location, hour, date, category, speaker } = route.params;
+export default function DetailsScreen({ route }: DetailsScreenProps) {
+    const { id, title, description, location, hour, date, category, speaker } = route.params;
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
             <View style={styles.infoBox}>
+                <Text style={styles.label}>ID wydarzenia:</Text>
+                <Text style={styles.value}>{id}</Text>
+
                 <Text style={styles.label}>Godzina:</Text>
                 <Text style={styles.value}>{hour}</Text>
 

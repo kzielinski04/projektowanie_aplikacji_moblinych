@@ -5,6 +5,7 @@ export type RootStackParamList = {
     Home: undefined;
     FavoritePosts: undefined;
     Details: {
+        id: number;
         title: string;
         description: string;
         location: string;

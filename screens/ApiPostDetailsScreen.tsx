@@ -54,7 +54,7 @@ export default function ApiPostDetailsScreen({
     if (error || commentsError) {
         return (
             <View style={styles.centered}>
-                <Text style={styles.errorText}>{error}</Text>
+                <Text style={styles.errorText}>{error || commentsError}</Text>
             </View>
         );
     }
